@@ -22,10 +22,6 @@ class WismaController extends Controller
       foreach($wisma as $list){
         $row = array();
         $row[] = $list->nama_wisma;
-        if ($list->nik == null) {
-          $nik = '<span class="label label-success">Kosong</span>';
-        }
-        $row[] = $nik;
 
         if ($list->status == '1') {
           $status = '<span class="label label-success">Kosong</span>';
@@ -37,6 +33,7 @@ class WismaController extends Controller
         }
         $row[] = $tanggal;
         $row[] = '<div class="btn-group">
+                <a href="tambah_orang" class="btn btn-warning btn-sm"><i class="fa fa-circle"></i></a>
                 <a onclick="editForm('.$list->id_wisma.')" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                 <a onclick="deleteData('.$list->id_wisma.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div>';
         $data[] = $row;
@@ -44,6 +41,10 @@ class WismaController extends Controller
 
       $output = array("data" => $data);
       return response()->json($output);
+    }
+
+    public function addOrang(){
+      return view('wisma.tambah_orang');
     }
 
     public function saveWisma1(Request $request){

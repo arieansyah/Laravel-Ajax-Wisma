@@ -20,5 +20,6 @@ Route::resource('buku_tamu', 'BukuTamuController');
 
 Route::get('wisma1/data', 'WismaController@listDataWisma1')->name('wisma1.data');
 Route::get('wisma1', 'WismaController@wisma1');
+Route::get('tambah_orang', 'WismaController@addOrang');
 Route::get('wisma1/{id}/edit', 'WismaController@edit');
 Route::post('wisma1/store', 'WismaController@saveWisma1')->name('wisma1.store');

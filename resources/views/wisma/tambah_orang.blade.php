@@ -14,9 +14,23 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <a onclick="addForm()" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah</a>
+        <form class="form form-horizontal form-produk" method="post">
+          {{ csrf_field() }}
+          <div class="form-group">
+            <label for="kode" class="col-md-2 control-label">Kode Produk</label>
+            <div class="col-md-5">
+              <div class="input-group">
+                <input id="kode" type="text" class="form-control" name="kode" autofocus required>
+                <span class="input-group-btn">
+                  <button onclick="showProduct()" type="button" class="btn btn-info">...</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="box-body">
+
 
 <table class="table table-striped">
 <thead>
@@ -35,12 +49,12 @@
   </div>
 </div>
 
-{{-- @include('wisma.form')
-@include('wisma.formBooking') --}}
+@include('wisma.form')
+@include('wisma.formBooking')
 @endsection
 
 @section('script')
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 var table, save_method;
 $(function(){
 
@@ -93,7 +107,19 @@ function addOrang(id){
   $('#modal-tambah-orang').modal('show');
 }
 
-
+function selectTamu(nik){
+  $.ajax({
+    url : "{{ route('wisma1.saveTamu') }}",
+    type : "POST",
+    data : $('.form-produk').serialize(),
+    success : function(data){
+      $('#kode').val('').focus();
+    },
+    error : function(){
+      alert("Tidak dapat menyimpan data!");
+    }
+  });
+}
 
 function editForm(id){
    save_method = "edit";
@@ -138,5 +164,49 @@ function deleteData(id){
      });
    }
 }
-</script>
+</script> --}}
 @endsection
+
+{{-- <div class="modal" id="modal-tambah-orang" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+   <form class="form-horizontal" data-toggle="validator" method="post">
+   {{ csrf_field() }} {{ method_field('POST') }}
+
+   <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"> &times; </span> </button>
+      <h3 class="modal-title"></h3>
+   </div>
+
+   <div class="modal-body">
+   	<table class="table table-striped tabel-produk">
+   		<thead>
+   		   <tr>
+   		      <th>NIK</th>
+   		      <th>Nama</th>
+   		   </tr>
+   		</thead>
+   		<tbody>
+   			@foreach($tamu as $data)
+   			<tr>
+   		      <th>{{ $data->nik }}</th>
+   		      <th>{{ $data->nama }}</th>
+   		      <th><a onclick="selectTamu({{ $data->nik }})" class="btn btn-primary"><i class="fa fa-check-circle"></i> Pilih</a></th>
+   		    </tr>
+   			@endforeach
+   		</tbody>
+   	</table>
+
+   </div>
+
+   <div class="modal-footer">
+      <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-floppy-o"></i> Simpan </button>
+      <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal</button>
+   </div>
+
+   </form>
+
+         </div>
+      </div>
+   </div> --}}

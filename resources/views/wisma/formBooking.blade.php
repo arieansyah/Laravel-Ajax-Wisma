@@ -46,14 +46,3 @@
          </div>
       </div>
    </div>
-
-@include('wisma.buku_tamu')
-
-<script type="text/javascript">
-var table;
-
-function showTamu(){
-  $('#modal-tamu').modal('show');
-}
-
-</script>
