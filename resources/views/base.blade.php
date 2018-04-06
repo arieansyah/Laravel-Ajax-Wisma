@@ -78,6 +78,51 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
+          <li class="treeview">
+            <a href="{{ url('buku_tamu') }}">
+              <i class="fa fa-dashboard"></i> <span>Buku Tamu</span>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-dashboard"></i> <span>Wisma</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="{{ url('wisma1') }}">
+                  <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 1</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 2</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 3</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 4</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 5</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-dashboard"></i> <span>Laporan</span>
+            </a>
+          </li>
       </ul>
     </section>
     <!-- /.sidebar -->

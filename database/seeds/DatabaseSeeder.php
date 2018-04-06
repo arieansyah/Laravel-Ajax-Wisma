@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+      for ($i=1; $i < 31; $i++) {
+	    	DB::table('wismas')->insert([
+	            'nama_wisma' => $i,
+              'status' => 1,
+	        ]);
+    	}
         // $this->call(UsersTableSeeder::class);
     }
 }
