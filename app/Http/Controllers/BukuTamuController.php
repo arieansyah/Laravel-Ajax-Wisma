@@ -124,6 +124,7 @@ class BukuTamuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = BukuTamu::find($id);
+        $delete->delete();
     }
 }

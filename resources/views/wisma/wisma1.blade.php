@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="row">
   <div class="col-xs-12">
     <div class="box">
@@ -87,6 +88,26 @@ function addForm(){
    $('#modal-form').modal('show');
    $('#modal-form form')[0].reset();
    $('.modal-title').text('Tambah Wisma 1');
+}
+
+function resetData(id){
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  if(confirm("Apakah yakin ?? semua pada kamar ini akan dihapus")){
+    $.ajax({
+      url : "wisma1/"+id+"/reset",
+      type : "PATCH",
+      success : function(data){
+        table.ajax.reload();
+      },
+      error : function(){
+        alert("Semua Data Sudah di Reset");
+      }
+    });
+  }
 }
 
 function editForm(id){

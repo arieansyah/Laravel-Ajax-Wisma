@@ -22,6 +22,8 @@ Route::get('wisma1/data', 'WismaController@listDataWisma1')->name('wisma1.data')
 Route::get('wisma1', 'WismaController@wisma1')->name('wisma1');
 Route::patch('wisma1/{id}/update', 'WismaController@update');
 Route::get('wisma1/{id}/edit', 'WismaController@edit');
+Route::patch('wisma1/{id}/reset', 'WismaController@reset');
+Route::delete('wisma1/{id}/{idd}/delete', 'WismaController@destroy')->name('wisma1.delete');
 //Route::post('wisma1/store', 'WismaController@saveWisma1')->name('wisma1.store');
 
 Route::get('wisma/{id}/data', 'WismaController@listDataNik')->name('wisma.data');

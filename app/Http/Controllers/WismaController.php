@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\BukuTamu;
 use Redirect;
 use App\Wisma;
+use Carbon\Carbon;
 use App\DetailWisma;
 class WismaController extends Controller
 {
@@ -62,19 +63,30 @@ class WismaController extends Controller
 
         if ($list->tanggal == null) {
           $tanggal = '<span class="label label-success">Kosong</span>';
+        }elseif ($list->tanggal < Carbon::now()) {
+          $tanggal = '<span class="label label-danger">Masa Habis</span>';
         }else {
           $tanggal = $list->tanggal;
         }
         $row[] = $tanggal;
         $row[] = '<div class="btn-group">
-                <a href="wisma1/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-circle"></i></a>
-                <a onclick="editForm('.$list->id_wisma.')" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-                <a onclick="deleteData('.$list->id_wisma.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div>';
+                <a href="wisma1/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-user-plus"></i></a>
+                <a onclick="resetData('.$list->id_wisma.')" class="btn btn-primary btn-sm">Reset</a></div>';
         $data[] = $row;
       }
 
       $output = array("data" => $data);
       return response()->json($output);
+    }
+
+    public function reset(Request $request, $id){
+      $update = Wisma::find($id);
+      $update->status = '1';
+      $update->tanggal = null;
+      $update->update();
+
+      $reset = DetailWisma::where('wisma_id', $id)->first();
+      $reset->delete();
     }
 
     public function addOrang($id){
@@ -101,4 +113,11 @@ class WismaController extends Controller
       $wisma = Wisma::find($id);
       echo json_encode($wisma);
     }
+
+    public function destroy($id, $idd){
+      $delete = DetailWisma::find($idd);
+      $delete->delete();
+    }
+
+
 }

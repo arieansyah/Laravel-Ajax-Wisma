@@ -139,7 +139,7 @@ function selectNik(nik){
 function deleteData(id){
    if(confirm("Apakah yakin data akan dihapus?")){
      $.ajax({
-       url : "wisma1/"+id,
+       url : id+"/delete",
        type : "POST",
        data : {'_method' : 'DELETE', '_token' : $('meta[name=csrf-token]').attr('content')},
        success : function(data){
