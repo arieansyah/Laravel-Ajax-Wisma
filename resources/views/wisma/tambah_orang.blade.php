@@ -16,13 +16,14 @@
       <div class="box-header">
         <form class="form form-horizontal form-produk" method="post">
           {{ csrf_field() }}
+          <input type="hidden" id="id" name="id" value="{{ $tambah->id_wisma }}">
           <div class="form-group">
-            <label for="kode" class="col-md-2 control-label">Kode Produk</label>
+            <label for="nik" class="col-md-2 control-label">NIK</label>
             <div class="col-md-5">
               <div class="input-group">
-                <input id="kode" type="text" class="form-control" name="kode" autofocus required>
+                <input id="nik" type="text" class="form-control" name="nik" autofocus required>
                 <span class="input-group-btn">
-                  <button onclick="showProduct()" type="button" class="btn btn-info">...</button>
+                  <button onclick="addNik()" type="button" class="btn btn-info">...</button>
                 </span>
               </div>
             </div>
@@ -32,16 +33,17 @@
       <div class="box-body">
 
 
-<table class="table table-striped">
-<thead>
-   <tr>
-      <th width="30">Nomor Kamar</th>
-      <th>Status</th>
-      <th>Tanggal Akhir</th>
-      <th width="100">Aksi</th>
-   </tr>
-</thead>
-<tbody></tbody>
+<table class="table table-striped table-orang">
+  <thead>
+     <tr>
+        <th width="30">No</th>
+        <th>NIK</th>
+        <th>Nama</th>
+        <th>Telepon</th>
+        <th width="100">Aksi</th>
+     </tr>
+  </thead>
+  <tbody></tbody>
 </table>
 
       </div>
@@ -49,12 +51,11 @@
   </div>
 </div>
 
-@include('wisma.form')
-@include('wisma.formBooking')
+@include('wisma.nik')
 @endsection
 
 @section('script')
-{{-- <script type="text/javascript">
+<script type="text/javascript">
 var table, save_method;
 $(function(){
 
@@ -63,35 +64,15 @@ $(function(){
     autoclose: true
   });
 
-   table = $('.table').DataTable({
+  $('.tabel-nik').DataTable();
+
+   table = $('.table-orang').DataTable({
      "processing" : true,
      "bPaginate" : false,
      "ajax" : {
-       "url" : "{{ route('wisma1.data') }}",
+       "url" : "{{ route('wisma.data', $tambah->id_wisma) }}",
        "type" : "GET"
      }
-   });
-
-   $('#modal-form form').validator().on('submit', function(e){
-      if(!e.isDefaultPrevented()){
-         var id = $('#id').val();
-         if(save_method == "add") url = "{{ route('wisma1.store') }}";
-         else url = "wisma1/"+id;
-
-         $.ajax({
-           url : url,
-           type : "POST",
-           data : $('#modal-form form').serialize(),
-           success : function(data){
-             $('#modal-form').modal('hide');
-             table.ajax.reload();
-           },
-           error : function(){
-             alert("Tidak dapat menyimpan data!");
-           }
-         });
-        return false;
-      }
    });
 });
 
@@ -103,17 +84,20 @@ function addForm(){
    $('.modal-title').text('Tambah Wisma 1');
 }
 
-function addOrang(id){
-  $('#modal-tambah-orang').modal('show');
+function addNik(){
+  $('#modal-nik').modal('show');
 }
 
-function selectTamu(nik){
+function selectNik(nik){
+  $('#nik').val(nik);
+  $('#modal-nik').modal('hide');
   $.ajax({
-    url : "{{ route('wisma1.saveTamu') }}",
+    url : "{{ route('wisma1.store') }}",
     type : "POST",
     data : $('.form-produk').serialize(),
     success : function(data){
-      $('#kode').val('').focus();
+      table.ajax.reload();
+      $('#nik').val('').focus();
     },
     error : function(){
       alert("Tidak dapat menyimpan data!");
@@ -164,49 +148,5 @@ function deleteData(id){
      });
    }
 }
-</script> --}}
+</script>
 @endsection
-
-{{-- <div class="modal" id="modal-tambah-orang" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-   <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-
-   <form class="form-horizontal" data-toggle="validator" method="post">
-   {{ csrf_field() }} {{ method_field('POST') }}
-
-   <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"> &times; </span> </button>
-      <h3 class="modal-title"></h3>
-   </div>
-
-   <div class="modal-body">
-   	<table class="table table-striped tabel-produk">
-   		<thead>
-   		   <tr>
-   		      <th>NIK</th>
-   		      <th>Nama</th>
-   		   </tr>
-   		</thead>
-   		<tbody>
-   			@foreach($tamu as $data)
-   			<tr>
-   		      <th>{{ $data->nik }}</th>
-   		      <th>{{ $data->nama }}</th>
-   		      <th><a onclick="selectTamu({{ $data->nik }})" class="btn btn-primary"><i class="fa fa-check-circle"></i> Pilih</a></th>
-   		    </tr>
-   			@endforeach
-   		</tbody>
-   	</table>
-
-   </div>
-
-   <div class="modal-footer">
-      <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-floppy-o"></i> Simpan </button>
-      <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal</button>
-   </div>
-
-   </form>
-
-         </div>
-      </div>
-   </div> --}}

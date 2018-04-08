@@ -5,11 +5,40 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BukuTamu;
 use App\Wisma;
-
+use App\DetailWisma;
 class WismaController extends Controller
 {
     public function wisma1(){
+
       return view('wisma.wisma1');
+    }
+
+    public function listDataNik($id){
+      $dataNik = DetailWisma::leftJoin('buku_tamus', 'buku_tamus.nik', '=', 'detail_wismas.nik')
+      ->where('wisma_id', $id)->get();
+      $no = 0;
+      $data = array();
+      foreach($dataNik as $list){
+        $no ++;
+        $row = array();
+        $row[] = $no;
+        $row[] = $list->nik;
+        $row[] = $list->nama;
+        $row[] = $list->nomor_telepon;
+        $row[] = '<div class="btn-group">
+                <a onclick="deleteData('.$list->id_detail.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div>';
+        $data[] = $row;
+      }
+
+      $output = array("data" => $data);
+      return response()->json($output);
+    }
+
+    public function saveOrang(Request $request){
+      $save = new DetailWisma;
+      $save->nik = $request->nik;
+      $save->wisma_id = $request->id;
+      $save->save();
     }
 
     public function listDataWisma1()
@@ -33,7 +62,7 @@ class WismaController extends Controller
         }
         $row[] = $tanggal;
         $row[] = '<div class="btn-group">
-                <a href="tambah_orang" class="btn btn-warning btn-sm"><i class="fa fa-circle"></i></a>
+                <a href="wisma1/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-circle"></i></a>
                 <a onclick="editForm('.$list->id_wisma.')" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                 <a onclick="deleteData('.$list->id_wisma.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div>';
         $data[] = $row;
@@ -43,8 +72,10 @@ class WismaController extends Controller
       return response()->json($output);
     }
 
-    public function addOrang(){
-      return view('wisma.tambah_orang');
+    public function addOrang($id){
+      $detailNik = BukuTamu::all();
+      $tambah = Wisma::find($id);
+      return view('wisma.tambah_orang', compact('detailNik', 'tambah'));
     }
 
     public function saveWisma1(Request $request){

@@ -89,12 +89,6 @@ function addForm(){
    $('.modal-title').text('Tambah Wisma 1');
 }
 
-function addOrang(id){
-  $('#modal-tambah-orang').modal('show');
-}
-
-
-
 function editForm(id){
    save_method = "edit";
    $('input[name=_method]').val('PATCH');
