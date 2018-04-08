@@ -45,13 +45,14 @@
   </thead>
   <tbody></tbody>
 </table>
-
+  <button type="button" onclick="addTanggal({{ $tambah->id_wisma }})" class="btn-lg btn-primary btn-save pull-right"><i class="fa fa-floppy-o"></i> Finish </button>
       </div>
     </div>
   </div>
 </div>
 
 @include('wisma.nik')
+@include('wisma.tanggal')
 @endsection
 
 @section('script')
@@ -74,18 +75,49 @@ $(function(){
        "type" : "GET"
      }
    });
-});
 
-function addForm(){
-   save_method = "add";
-   $('input[name=_method]').val('POST');
-   $('#modal-form').modal('show');
-   $('#modal-form form')[0].reset();
-   $('.modal-title').text('Tambah Wisma 1');
-}
+   $('#modal-tanggal form').validator().on('submit', function(e){
+      if(!e.isDefaultPrevented()){
+         var id = $('#id').val();
+
+         $.ajax({
+           url : "update",
+           type : "POST",
+           data : $('#modal-tanggal form').serialize(),
+           success : function(data){
+             $('#modal-tanggal').modal('hide');
+             window.location.assign("{{ route('wisma1') }}")
+           },
+           error : function(){
+             alert("Tidak dapat menyimpan data!");
+           }
+         });
+         return false;
+     }
+   });
+});
 
 function addNik(){
   $('#modal-nik').modal('show');
+}
+
+function addTanggal(id){
+  $('input[name=_method]').val('PATCH');
+  $('#modal-tanggal form')[0].reset();
+  $.ajax({
+    url : "edit",
+    type : "GET",
+    dataType : "JSON",
+    success : function(data){
+      $('#modal-tanggal').modal('show');
+
+      $('#id').val(data.id_wisma);
+
+    },
+    error : function(){
+      alert("Tidak dapat menampilkan data!");
+    }
+  });
 }
 
 function selectNik(nik){
@@ -97,40 +129,11 @@ function selectNik(nik){
     data : $('.form-produk').serialize(),
     success : function(data){
       table.ajax.reload();
-      $('#nik').val('').focus();
     },
     error : function(){
       alert("Tidak dapat menyimpan data!");
     }
   });
-}
-
-function editForm(id){
-   save_method = "edit";
-   $('input[name=_method]').val('PATCH');
-   $('#modal-booking form')[0].reset();
-   $.ajax({
-     url : "wisma1/"+id+"/edit",
-     type : "GET",
-     dataType : "JSON",
-     success : function(data){
-       $('#modal-booking').modal('show');
-       $('.modal-title').text('Edit Wisma 1');
-
-       $('#id').val(data.id_wisma);
-       $('#nik').val(data.nik);
-       $('#nama_tamu').val(data.nama_tamu);
-       $('#status').val(data.status);
-       $('#tanggal').val(data.tanggal);
-       $('#alamat').val(data.alamat);
-       $('#keterangan').val(data.keterangan);
-
-
-     },
-     error : function(){
-       alert("Tidak dapat menampilkan data!");
-     }
-   });
 }
 
 function deleteData(id){

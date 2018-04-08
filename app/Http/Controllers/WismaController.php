@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BukuTamu;
+use Redirect;
 use App\Wisma;
 use App\DetailWisma;
 class WismaController extends Controller
@@ -54,11 +55,15 @@ class WismaController extends Controller
 
         if ($list->status == '1') {
           $status = '<span class="label label-success">Kosong</span>';
+        }else {
+          $status = '<span class="label label-danger">Penuh</span>';
         }
         $row[] = $status;
 
         if ($list->tanggal == null) {
           $tanggal = '<span class="label label-success">Kosong</span>';
+        }else {
+          $tanggal = $list->tanggal;
         }
         $row[] = $tanggal;
         $row[] = '<div class="btn-group">
@@ -73,8 +78,8 @@ class WismaController extends Controller
     }
 
     public function addOrang($id){
-      $detailNik = BukuTamu::all();
       $tambah = Wisma::find($id);
+      $detailNik = BukuTamu::all();
       return view('wisma.tambah_orang', compact('detailNik', 'tambah'));
     }
 
@@ -85,8 +90,15 @@ class WismaController extends Controller
       $wisma1->save();
     }
 
+    public function update(Request $request, $id){
+      $update = Wisma::find($id);
+      $update->status = '2';
+      $update->tanggal = $request->tanggal;
+      $update->update();
+    }
+
     public function edit($id){
-      $wisma1 = Wisma::find($id);
-      echo json_encode($wisma1);
+      $wisma = Wisma::find($id);
+      echo json_encode($wisma);
     }
 }

@@ -1,4 +1,4 @@
-<div class="modal" id="modal-booking" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal" id="modal-tanggal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -11,29 +11,15 @@
    </div>
 
 <div class="modal-body">
-
    <input type="hidden" id="id" name="id">
-
    <div class="form-group">
-       <label for="tamu" class="col-md-2 control-label">Buku Tamu</label>
+       <label for="tanggal" class="col-md-2 control-label">Tanggal Berakhir</label>
        <div class="col-md-5">
          <div class="input-group">
-           <input id="tamu" type="text" class="form-control" name="tamu" autofocus required>
-           <span class="input-group-btn">
-             <button onclick="showTamu()" type="button" class="btn btn-info">...</button>
-           </span>
+           <input id="tanggal" type="text" class="form-control" name="tanggal" autofocus required>
          </div>
        </div>
    </div>
-
-   <div class="form-group">
-      <label for="tanggal" class="col-md-3 control-label">Tanggal Berakhir</label>
-      <div class="col-md-6">
-         <input id="tanggal" type="text" class="form-control" name="tanggal" autofocus required>
-         <span class="help-block with-errors"></span>
-      </div>
-   </div>
-
 </div>
 
    <div class="modal-footer">

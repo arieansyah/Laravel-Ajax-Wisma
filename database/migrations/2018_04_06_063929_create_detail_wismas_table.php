@@ -15,8 +15,8 @@ class CreateDetailWismasTable extends Migration
     {
         Schema::create('detail_wismas', function (Blueprint $table) {
             $table->increments('id_detail');
-            $table->string('nik')->unsigned();
-            $table->integer('wisma_id');
+            $table->bigInteger('nik')->unsigned();
+            $table->integer('wisma_id')->unsigned();
             $table->timestamps();
         });
     }

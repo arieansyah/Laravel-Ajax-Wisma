@@ -16,7 +16,7 @@ class CreateBukuTamusTable extends Migration
         Schema::create('buku_tamus', function (Blueprint $table) {
             $table->increments('id_bukutamu');
             $table->string('nama');
-            $table->string('nik');
+            $table->bigInteger('nik')->unsigned();
             $table->text('alamat');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('nomor_telepon');
