@@ -1,12 +1,12 @@
 @extends('base')
 
 @section('title')
-  Wisma 1
+  Wisma
 @endsection
 
 @section('breadcrumb')
    @parent
-   <li>Wisma 1</li>
+   <li>Wisma</li>
 @endsection
 
 @section('content')
@@ -86,7 +86,7 @@ $(function(){
            data : $('#modal-tanggal form').serialize(),
            success : function(data){
              $('#modal-tanggal').modal('hide');
-             window.location.assign("{{ route('wisma1') }}")
+             window.history.back();
            },
            error : function(){
              alert("Tidak dapat menyimpan data!");
@@ -110,7 +110,6 @@ function addTanggal(id){
     dataType : "JSON",
     success : function(data){
       $('#modal-tanggal').modal('show');
-
       $('#id').val(data.id_wisma);
 
     },
@@ -124,7 +123,7 @@ function selectNik(nik){
   $('#nik').val(nik);
   $('#modal-nik').modal('hide');
   $.ajax({
-    url : "{{ route('wisma1.store') }}",
+    url : "{{ route('wisma.store') }}",
     type : "POST",
     data : $('.form-produk').serialize(),
     success : function(data){

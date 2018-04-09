@@ -1,12 +1,12 @@
 @extends('base')
 
 @section('title')
-  Wisma 1
+  Wisma
 @endsection
 
 @section('breadcrumb')
    @parent
-   <li>Wisma 1</li>
+   <li>Wisma</li>
 @endsection
 
 @section('content')
@@ -50,7 +50,7 @@ $(function(){
      "processing" : true,
      "bPaginate" : false,
      "ajax" : {
-       "url" : "{{ route('wisma1.data') }}",
+       "url" : "{{ route('wisma3.data') }}",
        "type" : "GET"
      }
    });
@@ -59,7 +59,7 @@ $(function(){
       if(!e.isDefaultPrevented()){
          var id = $('#id').val();
          if(save_method == "add") url = "{{ route('wisma.store') }}";
-         else url = "wisma/"+id;
+         else url = "wisma1/"+id;
 
          $.ajax({
            url : url,
@@ -106,6 +106,5 @@ function resetData(id){
     });
   }
 }
-
 </script>
 @endsection

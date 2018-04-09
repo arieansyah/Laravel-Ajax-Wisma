@@ -97,23 +97,18 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="{{ url('wisma2') }}">
                   <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 2</span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="{{ url('wisma3') }}">
                   <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 3</span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="{{ url('wisma4') }}">
                   <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 4</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa"></i><i class="fa fa-circle"></i> <span>Wisma 5</span>
                 </a>
               </li>
             </ul>

@@ -11,8 +11,19 @@ use App\DetailWisma;
 class WismaController extends Controller
 {
     public function wisma1(){
-
       return view('wisma.wisma1');
+    }
+
+    public function wisma2(){
+      return view('wisma.wisma2');
+    }
+
+    public function wisma3(){
+      return view('wisma.wisma3');
+    }
+
+    public function wisma4(){
+      return view('wisma.wisma4');
     }
 
     public function listDataNik($id){
@@ -41,42 +52,6 @@ class WismaController extends Controller
       $save->nik = $request->nik;
       $save->wisma_id = $request->id;
       $save->save();
-    }
-
-    public function listDataWisma1()
-    {
-      // $wisma = Wisma::leftJoin('buku_tamus', 'buku_tamus.nik', '=', 'wismas.nik')
-      // ->where('name', 'pattern')
-      // ->get();
-      $wisma = Wisma::all();
-      $data = array();
-      foreach($wisma as $list){
-        $row = array();
-        $row[] = $list->nama_wisma;
-
-        if ($list->status == '1') {
-          $status = '<span class="label label-success">Kosong</span>';
-        }else {
-          $status = '<span class="label label-danger">Penuh</span>';
-        }
-        $row[] = $status;
-
-        if ($list->tanggal == null) {
-          $tanggal = '<span class="label label-success">Kosong</span>';
-        }elseif ($list->tanggal < Carbon::now()) {
-          $tanggal = '<span class="label label-danger">Masa Habis</span>';
-        }else {
-          $tanggal = $list->tanggal;
-        }
-        $row[] = $tanggal;
-        $row[] = '<div class="btn-group">
-                <a href="wisma1/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-user-plus"></i></a>
-                <a onclick="resetData('.$list->id_wisma.')" class="btn btn-primary btn-sm">Reset</a></div>';
-        $data[] = $row;
-      }
-
-      $output = array("data" => $data);
-      return response()->json($output);
     }
 
     public function reset(Request $request, $id){
@@ -119,5 +94,136 @@ class WismaController extends Controller
       $delete->delete();
     }
 
+    public function listDataWisma1()
+    {
+      $wisma = Wisma::where('wisma', 1)->get();
+      $data = array();
+      foreach($wisma as $list){
+        $row = array();
+        $row[] = $list->nomor_kamar;
+
+        if ($list->status == '1') {
+          $status = '<span class="label label-success">Kosong</span>';
+        }else {
+          $status = '<span class="label label-danger">Penuh</span>';
+        }
+        $row[] = $status;
+
+        if ($list->tanggal == null) {
+          $tanggal = '<span class="label label-success">Kosong</span>';
+        }elseif ($list->tanggal < Carbon::now()) {
+          $tanggal = '<span class="label label-danger">Masa Habis</span>';
+        }else {
+          $tanggal = $list->tanggal;
+        }
+        $row[] = $tanggal;
+        $row[] = '<div class="btn-group">
+                <a href="wisma/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-user-plus"></i></a>
+                <a onclick="resetData('.$list->id_wisma.')" class="btn btn-primary btn-sm">Reset</a></div>';
+        $data[] = $row;
+      }
+
+      $output = array("data" => $data);
+      return response()->json($output);
+    }
+
+    public function listDataWisma2()
+    {
+      $wisma = Wisma::where('wisma', 2)->get();
+      $data = array();
+      foreach($wisma as $list){
+        $row = array();
+        $row[] = $list->nomor_kamar;
+
+        if ($list->status == '1') {
+          $status = '<span class="label label-success">Kosong</span>';
+        }else {
+          $status = '<span class="label label-danger">Penuh</span>';
+        }
+        $row[] = $status;
+
+        if ($list->tanggal == null) {
+          $tanggal = '<span class="label label-success">Kosong</span>';
+        }elseif ($list->tanggal < Carbon::now()) {
+          $tanggal = '<span class="label label-danger">Masa Habis</span>';
+        }else {
+          $tanggal = $list->tanggal;
+        }
+        $row[] = $tanggal;
+        $row[] = '<div class="btn-group">
+                <a href="wisma/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-user-plus"></i></a>
+                <a onclick="resetData('.$list->id_wisma.')" class="btn btn-primary btn-sm">Reset</a></div>';
+        $data[] = $row;
+      }
+
+      $output = array("data" => $data);
+      return response()->json($output);
+    }
+
+    public function listDataWisma3()
+    {
+      $wisma = Wisma::where('wisma', 3)->get();
+      $data = array();
+      foreach($wisma as $list){
+        $row = array();
+        $row[] = $list->nomor_kamar;
+
+        if ($list->status == '1') {
+          $status = '<span class="label label-success">Kosong</span>';
+        }else {
+          $status = '<span class="label label-danger">Penuh</span>';
+        }
+        $row[] = $status;
+
+        if ($list->tanggal == null) {
+          $tanggal = '<span class="label label-success">Kosong</span>';
+        }elseif ($list->tanggal < Carbon::now()) {
+          $tanggal = '<span class="label label-danger">Masa Habis</span>';
+        }else {
+          $tanggal = $list->tanggal;
+        }
+        $row[] = $tanggal;
+        $row[] = '<div class="btn-group">
+                <a href="wisma/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-user-plus"></i></a>
+                <a onclick="resetData('.$list->id_wisma.')" class="btn btn-primary btn-sm">Reset</a></div>';
+        $data[] = $row;
+      }
+
+      $output = array("data" => $data);
+      return response()->json($output);
+    }
+
+    public function listDataWisma4()
+    {
+      $wisma = Wisma::where('wisma', 4)->get();
+      $data = array();
+      foreach($wisma as $list){
+        $row = array();
+        $row[] = $list->nomor_kamar;
+
+        if ($list->status == '1') {
+          $status = '<span class="label label-success">Kosong</span>';
+        }else {
+          $status = '<span class="label label-danger">Penuh</span>';
+        }
+        $row[] = $status;
+
+        if ($list->tanggal == null) {
+          $tanggal = '<span class="label label-success">Kosong</span>';
+        }elseif ($list->tanggal < Carbon::now()) {
+          $tanggal = '<span class="label label-danger">Masa Habis</span>';
+        }else {
+          $tanggal = $list->tanggal;
+        }
+        $row[] = $tanggal;
+        $row[] = '<div class="btn-group">
+                <a href="wisma/'.$list->id_wisma.'/tambah" class="btn btn-warning btn-sm"><i class="fa fa-user-plus"></i></a>
+                <a onclick="resetData('.$list->id_wisma.')" class="btn btn-primary btn-sm">Reset</a></div>';
+        $data[] = $row;
+      }
+
+      $output = array("data" => $data);
+      return response()->json($output);
+    }
 
 }

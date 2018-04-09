@@ -15,7 +15,8 @@ class CreateWismasTable extends Migration
     {
         Schema::create('wismas', function (Blueprint $table) {
             $table->increments('id_wisma');
-            $table->string('nama_wisma');
+            $table->integer('nomor_kamar');
+            $table->integer('wisma');
             $table->integer('status')->nullable('true');
             $table->date('tanggal')->nullable('true');
             $table->timestamps();
