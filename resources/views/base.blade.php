@@ -57,8 +57,6 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 
-          <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-          <!-- Control Sidebar Toggle Button -->
         </ul>
       </div>
     </nav>
@@ -114,7 +112,7 @@
             </ul>
           </li>
           <li class="treeview">
-            <a href="#">
+            <a href="{{ url('laporan') }}">
               <i class="fa fa-dashboard"></i> <span>Laporan</span>
             </a>
           </li>

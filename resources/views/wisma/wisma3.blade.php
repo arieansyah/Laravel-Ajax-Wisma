@@ -1,12 +1,12 @@
 @extends('base')
 
 @section('title')
-  Wisma
+  Wisma 3
 @endsection
 
 @section('breadcrumb')
    @parent
-   <li>Wisma</li>
+   <li>Wisma 3</li>
 @endsection
 
 @section('content')

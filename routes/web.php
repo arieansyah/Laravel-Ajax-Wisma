@@ -37,3 +37,8 @@ Route::get('wisma3/data', 'WismaController@listDataWisma3')->name('wisma3.data')
 
 Route::get('wisma4', 'WismaController@wisma4');
 Route::get('wisma4/data', 'WismaController@listDataWisma4')->name('wisma4.data');
+
+Route::get('laporan', 'LaporanController@index');
+Route::post('laporan', 'LaporanController@refresh')->name('laporan.refresh');
+Route::get('laporan/data/{awal}/{akhir}', 'LaporanController@listData')->name('laporan.data');
+Route::get('laporan/pdf/{awal}/{akhir}', 'LaporanController@exportPDF');
