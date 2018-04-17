@@ -18,6 +18,10 @@ class BukuTamuController extends Controller
         return view('buku_tamu.index');
     }
 
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function listData()
     {
 

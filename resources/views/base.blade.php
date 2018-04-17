@@ -56,7 +56,7 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-
+            <li><a href="{{url('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </ul>
       </div>
     </nav>
@@ -72,7 +72,7 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
           <li class="treeview">
-            <a href="#">
+            <a href="{{ url('/') }}">
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>

@@ -10,6 +10,10 @@ use Carbon\Carbon;
 use App\DetailWisma;
 class WismaController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function wisma1(){
       return view('wisma.wisma1');
     }

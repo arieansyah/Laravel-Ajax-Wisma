@@ -10,6 +10,10 @@ use PDF;
 
 class LaporanController extends Controller
 {
+  public function __construct(){
+      $this->middleware('auth');
+  }
+  
   public function index()
   {
     $awal = date('Y-m-d', mktime(0,0,0, date('m'), 1, date('Y')));
