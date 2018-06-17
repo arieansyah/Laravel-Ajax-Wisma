@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function(){
   $this->get('logout', 'Auth\LoginController@logout');
 
   Route::get('buku_tamu/data', 'BukuTamuController@listData')->name('buku_tamu.data');
+  Route::get('buku_tamu/{id}/lihat', 'BukuTamuController@show');
   Route::resource('buku_tamu', 'BukuTamuController');
 
   Route::get('wisma/{id}/tambah', 'WismaController@addOrang');

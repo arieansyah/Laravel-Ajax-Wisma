@@ -38,6 +38,7 @@
 </div>
 
 @include('buku_tamu.form')
+@include('buku_tamu.detail')
 @endsection
 
 @section('script')
@@ -82,6 +83,38 @@ function addForm(){
    $('#modal-form').modal('show');
    $('#modal-form form')[0].reset();
    $('.modal-title').text('Tambah Buku Tamu');
+}
+
+function showDetail(id){
+    $.ajax({
+      url : "buku_tamu/"+id+"/lihat",
+      type : "GET",
+      dataType : "JSON",
+
+      success : function(data){
+        $('#modal-detail').modal('show');
+        $('.modal-title').text('Detail '+data.nik);
+
+        $('.nik').text(data.nik);
+        $('.nama').text(data.nama);
+        $('.jenis_kelamin').text(data.jenis_kelamin);
+        $('.nomor_telepon').text(data.nomor_telepon);
+        $('.instansi').text(data.instansi);
+        if (data.nomor_kamar == null & data.wisma == null) {
+            $('.nomor_kamar').text('Kosong');
+            $('.wisma').text('Kosong');
+        }else {
+          $('.nomor_kamar').text(data.nomor_kamar);
+          $('.wisma').text(data.wisma);
+        }
+      },
+      error : function(){
+        alert("Tidak dapat menampilkan data!");
+      }
+    });
+
+    // table1.ajax.url("buku_tamu/"+id+"/lihat");
+    // table1.ajax.reload();
 }
 
 function editForm(id){

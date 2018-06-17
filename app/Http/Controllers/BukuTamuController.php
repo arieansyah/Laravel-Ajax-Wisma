@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BukuTamu;
+use App\DetailWisma;
 use Carbon\Carbon;
 
 class BukuTamuController extends Controller
@@ -37,8 +38,10 @@ class BukuTamuController extends Controller
         $row[] = $list->nomor_telepon;
         $row[] = $list->instansi;
         $row[] = '<div class="btn-group">
+                <a onclick="showDetail('.$list->id_bukutamu.')" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
                 <a onclick="editForm('.$list->id_bukutamu.')" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                 <a onclick="deleteData('.$list->id_bukutamu.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></div>';
+
         $data[] = $row;
       }
 
@@ -84,7 +87,17 @@ class BukuTamuController extends Controller
      */
     public function show($id)
     {
-        //
+
+      $bukutamu = DetailWisma::join('buku_tamus', 'buku_tamus.nik', '=', 'detail_wismas.nik')
+      ->join('wismas', 'wismas.id_wisma', '=', 'detail_wismas.wisma_id')
+      ->where('id_bukutamu', $id)
+      ->first();
+      $bukutamus = BukuTamu::find($id);
+      if ($bukutamu == null) {
+        echo json_encode($bukutamus);
+      }else {
+        echo json_encode($bukutamu);
+      }
     }
 
     /**
