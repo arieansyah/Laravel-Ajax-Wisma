@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Wisma2::class);
         $this->call(Wisma3::class);
         $this->call(Wisma4::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
 
